@@ -1,11 +1,11 @@
 {
-	"id": "sample-plugin",
-	"name": "Sample Plugin",
+	"id": "qdrant-sync",
+	"name": "Qdrant Sync",
 	"version": "1.0.0",
 	"minAppVersion": "0.15.0",
-	"description": "Demonstrates some of the capabilities of the Obsidian API.",
-	"author": "Obsidian",
-	"authorUrl": "https://obsidian.md",
-	"fundingUrl": "https://obsidian.md/pricing",
+	"description": "Sync your Obsidian notes to Qdrant.",
+	"author": "Tim VanReenen",
+	"authorUrl": "https://github.com/tvanreenen",
+	"fundingUrl": "https://buymeacoffee.com/tim.vanreenen",
 	"isDesktopOnly": false
 }

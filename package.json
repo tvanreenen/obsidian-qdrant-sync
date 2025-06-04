@@ -1,7 +1,7 @@
 {
-	"name": "obsidian-sample-plugin",
+	"name": "qdrant-sync",
 	"version": "1.0.0",
-	"description": "This is a sample plugin for Obsidian (https://obsidian.md)",
+	"description": "Vectorize your Obsidian notes and sync them to Qdrant.",
 	"main": "main.js",
 	"scripts": {
 		"dev": "node esbuild.config.mjs",
@@ -20,5 +20,12 @@
 		"obsidian": "latest",
 		"tslib": "2.4.0",
 		"typescript": "4.7.4"
+	},
+	"dependencies": {
+		"@langchain/core": "^0.3.57",
+		"@langchain/textsplitters": "^0.1.0",
+		"@qdrant/js-client-rest": "^1.14.1",
+		"js-sha256": "^0.11.1",
+		"uuid": "^11.1.0"
 	}
 }
