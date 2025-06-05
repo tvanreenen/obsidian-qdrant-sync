@@ -2,8 +2,6 @@
 
 Sync your Obsidian markdown notes with a [Qdrant](https://qdrant.tech/) vector database, using OpenAI embeddings for semantic search and retrieval.
 
----
-
 ## Features
 
 - **Automatic Sync:** Watches for note creation, modification, and deletion, and syncs changes to Qdrant.
@@ -13,23 +11,19 @@ Sync your Obsidian markdown notes with a [Qdrant](https://qdrant.tech/) vector d
 - **Customizable:** All parameters (API keys, batch sizes, chunking, etc.) are configurable via the plugin settings tab.
 - **Manual Commands:** 
   - Reindex the entire vault
-  - Index the active note
-
----
+  - Reindex the active note
 
 ## Why Use a Vector Store?
 
 Having your notes continuously indexed in a vector store like Qdrant means you can plug your knowledge base into a wide range of AI and search tools—semantic search, chatbots, retrieval-augmented generation (RAG), and more. Your vector store is always up to date as you work, unlocking powerful integrations and workflows across your toolchain.
 
----
-
 ## Unique ID Handling
 
-Each note must have a unique ID in its frontmatter (e.g., `uuid`).  
+Each note must have a unique ID in its frontmatter (e.g., `uuid`). This allows the plugin to query for and perform operations on notes that end up chunked into multiple vectors.
+
 **Tip:** For automatic and robust unique ID management, use my companion plugin:  
 👉 [Obsidian Unique Identifiers](https://github.com/tvanreenen/obsidian-unique-identifiers)  
 This plugin supports UUID, CUID, NanoID, ULID, and KSUID, and can bulk backfill or refresh IDs across your vault.  
-It ensures every note is uniquely referenced for advanced workflows, integrations, and data management.
 
 Example frontmatter:
 ```markdown
@@ -39,13 +33,9 @@ uuid: 123e4567-e89b-12d3-a456-426614174000
 ```
 The field name is configurable in settings (`ID Field`).
 
----
-
 ## Semantic Chunking
 
-Unlike simple fixed-size chunking, this plugin uses a recursive character splitter that is designed to respect markdown semantics—such as headings, lists, and paragraphs—when splitting your notes. This results in more natural, context-aware chunks, which improves the quality of embeddings and downstream search or retrieval tasks.
-
----
+Unlike simple fixed-size chunking, this plugin uses a recursive character splitter that is markdown-aware—splitting notes only when they exceed your configured limits, and doing so along natural boundaries like complete sentences, paragraphs, or markdown headings. This ensures chunks remain context-rich and improves the quality of embeddings for search and retrieval tasks.
 
 ## Installation
 
@@ -53,8 +43,6 @@ Unlike simple fixed-size chunking, this plugin uses a recursive character splitt
 2. Build the plugin (see [Obsidian sample plugin instructions](https://github.com/obsidianmd/obsidian-sample-plugin)).
 3. Copy the build output to your Obsidian vault's `.obsidian/plugins/` directory.
 4. Enable the plugin in Obsidian's settings.
-
----
 
 ## Configuration
 
@@ -73,44 +61,18 @@ Open the plugin settings in Obsidian and configure:
 
 > **Note:** As long as your Qdrant service is accessible and authenticatable, the plugin will automatically create the collection (if it doesn't exist) and index your notes for you. No manual setup required beyond providing the correct URL, API key, and collection name.
 
----
-
 ## Usage
 
 - **Automatic Sync:** Notes are synced automatically on create, modify, or delete.
-- **Manual Commands:**
-  - **Reindex Entire Vault:** Command palette → "Reindex Entire Vault to Qdrant"
-  - **Push Active Note:** Command palette → "Push Active Note to Qdrant"
-
----
-
-## Troubleshooting
-
-- Check the Obsidian console for error logs.
-- Ensure your Qdrant instance is running and accessible.
-- Make sure your OpenAI API key and model are correct.
-- Vector size must match the embedding model output.
-
----
+- **Manual Commands:** When you have the Command Palette core plugin enabled, you'll have access to the following commands.
+  - "Reindex Entire Vault to Qdrant"
+  - "Push Active Note to Qdrant"
 
 ## Roadmap / TODO
 
 - [ ] Expose "Prune Orphaned Points" command to clean up Qdrant.
-- [ ] Add support for other embedding providers.
-- [ ] More granular logging and error reporting.
-
----
-
-## See Also
-
-- [Obsidian Unique Identifiers](https://github.com/tvanreenen/obsidian-unique-identifiers):  
-  Automatically assign and manage unique IDs in the frontmatter of your Obsidian notes with support for UUID, CUID, NanoID, ULID, and KSUID.
-
----
-
-## License
-
-MIT
+- [ ] Cost optimazations around embedding/reembedding.
+- [ ] Publish as a community plugin.
 
 ---
 
